@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:interview/screens/categories/news_categories.dart';
+import 'package:interview/screens/home/home.dart';
 
 Widget buildPage(int index) {
   List<Widget> widget = [
-    Center(
-      child: Text("home"),
-    ),
-    Center(
-      child: Text("History"),
-    ),
+   const HomeScreen(),
+  const NewsCategories(),
     Center(
       child: Text("Profile"),
     ),
