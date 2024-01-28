@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interview/screens/news_app/bloc/app_blocs.dart';
+import 'package:interview/screens/news_app/news_application.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const NewsApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class NewsApp extends StatelessWidget {
+  const NewsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AppBlocs()),
+      ],
+      child: const MaterialApp(
+        home: NewsApplication(),
       ),
     );
   }
