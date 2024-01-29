@@ -1,41 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:interview/screens/news_app/bloc/app_blocs.dart';
-import 'package:interview/screens/news_app/bloc/app_events.dart';
-import 'package:interview/screens/news_app/bloc/app_state.dart';
+import 'package:interview/ui/application/bloc/app_blocs.dart';
+import 'package:interview/ui/application/bloc/app_events.dart';
+import 'package:interview/ui/application/bloc/app_state.dart';
 
 import 'package:interview/widgets/bottom_bar_pages.dart';
 
-class NewsApplication extends StatefulWidget {
-  const NewsApplication({super.key});
+class Application extends StatefulWidget {
+  const Application({super.key});
 
   @override
-  State<NewsApplication> createState() => _NewsApplicationState();
+  State<Application> createState() => _ApplicationState();
 }
 
-class _NewsApplicationState extends State<NewsApplication> {
+class _ApplicationState extends State<Application> {
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AppBlocs,AppState>(builder: (context,state){
-
+ Widget build(BuildContext context) {
+    return BlocBuilder<AppBlocs, AppState>(builder: (context, state) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Home",
-            style: TextStyle(
-              fontSize: 30,
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-              padding: const EdgeInsets.all(25),
-              child: buildPage(state.index)
-          ),
-        ),
+        body: buildPage(state.index),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: state.index,
-          onTap: (value){
+          onTap: (value) {
             context.read<AppBlocs>().add(ChangeIndexEvent(value));
           },
           type: BottomNavigationBarType.fixed,

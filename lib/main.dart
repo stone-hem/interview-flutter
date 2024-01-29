@@ -4,10 +4,13 @@ import 'package:interview/blocs/category/category_blocs.dart';
 import 'package:interview/blocs/category/category_events.dart';
 import 'package:interview/blocs/news/news_blocs.dart';
 import 'package:interview/blocs/news/news_events.dart';
+import 'package:interview/blocs/tab_news/tab_news_blocs.dart';
+import 'package:interview/blocs/tab_news/tab_news_events.dart';
 import 'package:interview/repository/news_categories_repository.dart';
 import 'package:interview/repository/news_repository.dart';
-import 'package:interview/screens/news_app/bloc/app_blocs.dart';
-import 'package:interview/screens/news_app/news_application.dart';
+import 'package:interview/repository/tab_news_categories_repository.dart';
+import 'package:interview/ui/application/bloc/app_blocs.dart';
+import 'package:interview/ui/application/application.dart';
 
 void main() {
   runApp(const NewsApp());
@@ -21,7 +24,8 @@ class NewsApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => NewsRepository(),),
-        RepositoryProvider(create: (context) => CategoryRepository(),)
+        RepositoryProvider(create: (context) => CategoryRepository(),),
+        // RepositoryProvider(create: (context) => TabNewsRepository(id: 1),),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -35,10 +39,16 @@ class NewsApp extends StatelessWidget {
               create: (context) => CategoryBloc(
                 RepositoryProvider.of<CategoryRepository>(context),
               )..add(LoadCategoryEvent())
-          )
+          ),
+          BlocProvider(
+              create: (context) => TabNewsBloc(
+                RepositoryProvider.of<TabNewsRepository>(context),
+              )..add(LoadTabNewsEvent())
+          ),
+
         ],
         child: const MaterialApp(
-          home: NewsApplication(),
+          home: Application(),
         ),
       ),
     );
