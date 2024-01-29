@@ -25,7 +25,6 @@ class NewsApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => NewsRepository(),),
         RepositoryProvider(create: (context) => CategoryRepository(),),
-        // RepositoryProvider(create: (context) => TabNewsRepository(id: 1),),
       ],
       child: MultiBlocProvider(
         providers: [

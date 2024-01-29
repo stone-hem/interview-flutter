@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/blocs/news/news_blocs.dart';
 import 'package:interview/blocs/news/news_states.dart';
 import 'package:interview/models/NewsModel.dart';
+import 'package:interview/ui/show/show.dart';
 
 class Recent extends StatefulWidget {
   const Recent({super.key});
@@ -21,7 +22,8 @@ class _RecentState extends State<Recent> {
         );
       } else if (state is NewsLoadedState) {
         List<NewsModel> newsList = state.news;
-         return SafeArea(
+        print(newsList);
+        return SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,44 +43,49 @@ class _RecentState extends State<Recent> {
                 child: PageView.builder(
                     itemCount: newsList.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                        padding: const EdgeInsets.all(20),
-                        decoration: const BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://images.unsplash.com/photo-1706200234277-3586cd003ba3?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-                          ),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Title goes here",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>  Show(news:newsList[index])));
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          margin: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(30),
                             ),
-                            Text(
-                              "Lorem Ipsum text Goes here, her we go! and we go again",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w900),
-                            )
-                          ],
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage("http://192.168.88.236:8000/images/${newsList[index].photo_url}"),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                newsList[index].title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                newsList[index].description,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w900),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     }),
