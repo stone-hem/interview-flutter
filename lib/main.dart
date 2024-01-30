@@ -46,6 +46,7 @@ class NewsApp extends StatelessWidget {
           ),
         ],
         child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: Application(),
         ),
       ),

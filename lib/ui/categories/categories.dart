@@ -99,7 +99,7 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                         tabs: categoryList.map((category) {
                           return Tab(
                             text: category
-                                .name, // Assuming 'name' is a property in your CategoryModel
+                                .name,
                           );
                         }).toList(),
                       ),
@@ -111,7 +111,7 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                         controller: _tabController,
                         children: categoryList.map((category) {
                           return _lists(category
-                              .id); // Pass category to your _lists function
+                              .id);
                         }).toList(),
                       ),
                     ),
@@ -144,9 +144,6 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
           );
         } else {
           List<TabNewsModel> newsList = snapshot.data!;
-          if (search.isNotEmpty) {
-            print(search);
-          }
           return ListView.builder(
             itemCount: newsList.length,
             itemBuilder: (context, index) {
