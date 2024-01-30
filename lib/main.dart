@@ -44,8 +44,6 @@ class NewsApp extends StatelessWidget {
                 RepositoryProvider.of<TabNewsRepository>(context),
               )..add(LoadTabNewsEvent())
           ),
-
-
         ],
         child: const MaterialApp(
           home: Application(),

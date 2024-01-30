@@ -58,8 +58,7 @@ class _SearchState extends State<Search> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.blue),
                         // Set border color on focus
-                        borderRadius: BorderRadius.circular(
-                            8), // Optional: Set border radius
+                        borderRadius: BorderRadius.circular(8), // Optional: Set border radius
                       ),
                       prefixIcon: const Icon(Icons.search),
                     ),
@@ -69,29 +68,24 @@ class _SearchState extends State<Search> {
                   future: _doSearch(search),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      print(search);
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasError) {
-                      print(search);
                       return Center(
                         child: Text('Error: ${snapshot.error}'),
                       );
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      print(search);
                       return const Center(
                         child: Text('No news data available.'),
                       );
                     } else {
                       List<TabNewsModel> newsList = snapshot.data!;
-                      print(newsList);
                       return ListView.builder(
                         itemCount: newsList.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           TabNewsModel newsItem = newsList[index];
-                          print(newsItem);
                           return Container(
                             width: MediaQuery.of(context).size.width * 0.8,
                             height: 100,
