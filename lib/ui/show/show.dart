@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interview/common/constants.dart';
 import 'package:interview/models/NewsModel.dart';
 
 class Show extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ShowState extends State<Show> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "http://192.168.88.236:8000/images/${news.photo_url}"),
+                        "$imageUrl/${news.photo_url}"),
                   ),
                 ),
               ),

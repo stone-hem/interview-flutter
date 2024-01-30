@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:interview/blocs/category/category_blocs.dart';
 import 'package:interview/blocs/category/category_states.dart';
+import 'package:interview/common/constants.dart';
 import 'package:interview/models/CategoryModel.dart';
 import 'package:interview/models/TabNewsModel.dart';
 import 'package:interview/ui/search/search.dart';
@@ -174,7 +175,7 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                              "http://192.168.88.236:8000/images/${newsItem.photo_url}"),
+                              "$imageUrl/${newsItem.photo_url}"),
                         ),
                       ),
                     ),
@@ -216,7 +217,7 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
 
   Future<List<TabNewsModel>> _getTab(int categoryId) async {
     Response response = await get(
-        Uri.parse("http://192.168.88.236:8000/api/categories/$categoryId"));
+        Uri.parse("$baseUrl/categories/$categoryId"));
     if (response.statusCode == 200) {
       final List result = jsonDecode(response.body);
       return result.map((e) => TabNewsModel.fromJson(e)).toList();

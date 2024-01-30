@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/blocs/news/news_blocs.dart';
 import 'package:interview/blocs/news/news_states.dart';
+import 'package:interview/common/constants.dart';
 import 'package:interview/models/NewsModel.dart';
 import 'package:interview/ui/search/search.dart';
 import 'package:interview/ui/show/show.dart';
@@ -106,7 +107,7 @@ class _RecentState extends State<Recent> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                        "http://192.168.88.236:8000/images/${newsList[index].photo_url}"),
+                                        "$imageUrl/${newsList[index].photo_url}"),
                                   ),
                                 ),
                                 child: Column(

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:interview/common/constants.dart';
 import 'package:interview/models/TabNewsModel.dart';
 
 class Search extends StatefulWidget {
@@ -111,7 +112,7 @@ class _SearchState extends State<Search> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                        "http://192.168.88.236:8000/images/${newsItem.photo_url}"),
+                                        "$imageUrl/${newsItem.photo_url}"),
                                   ),
                                 ),
                               ),
@@ -162,7 +163,7 @@ class _SearchState extends State<Search> {
 
   Future<List<TabNewsModel>> _doSearch(String search) async {
     Response response =
-        await get(Uri.parse("http://192.168.88.236:8000/api/search/$search"));
+        await get(Uri.parse("$baseUrl/search/$search"));
     if (response.statusCode == 200) {
       final List result = jsonDecode(response.body);
       return result.map((e) => TabNewsModel.fromJson(e)).toList();
