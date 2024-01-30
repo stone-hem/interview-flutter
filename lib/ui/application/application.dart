@@ -18,6 +18,7 @@ class _ApplicationState extends State<Application> {
  Widget build(BuildContext context) {
     return BlocBuilder<AppBlocs, AppState>(builder: (context, state) {
       return Scaffold(
+        backgroundColor: Colors.grey[100],
         body: buildPage(state.index),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: state.index,
@@ -38,7 +39,7 @@ class _ApplicationState extends State<Application> {
             ),
             BottomNavigationBarItem(
               label: "More",
-              icon: Icon(Icons.warning),
+              icon: Icon(Icons.search),
             )
           ],
         ),
