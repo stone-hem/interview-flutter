@@ -45,6 +45,7 @@ class NewsApp extends StatelessWidget {
               )..add(LoadTabNewsEvent())
           ),
 
+
         ],
         child: const MaterialApp(
           home: Application(),
